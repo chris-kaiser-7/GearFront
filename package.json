@@ -5,8 +5,9 @@
   "author": "Wes Bos",
   "license": "MIT",
   "scripts": {
-    "start": "keystone-next",
-    "dev": "keystone-next",
+    "start": "keystone start",
+    "build": "keystone build",
+    "dev": "keystone dev --entry=keystone.ts",
     "seed-data": "keystone-next --seed-data"
   },
   "eslintConfig": {
@@ -36,13 +37,8 @@
     ]
   },
   "dependencies": {
-    "@keystone-next/admin-ui": "^8.0.1",
-    "@keystone-next/auth": "^14.0.0",
-    "@keystone-next/cloudinary": "^2.0.9",
-    "@keystone-next/fields": "^4.1.1",
-    "@keystone-next/keystone": "^9.3.0",
-    "@keystone-next/types": "^12.0.0",
-    "@keystonejs/server-side-graphql-client": "^1.1.2",
+    "@keystone-6/auth": "^7.0.0",
+    "@keystone-6/core": "^5.7.0",
     "@types/nodemailer": "^6.4.0",
     "dotenv": "^8.2.0",
     "next": "^10.0.5",

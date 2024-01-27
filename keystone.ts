@@ -1,9 +1,6 @@
-import { createAuth } from '@keystone-next/auth';
-import { config, createSchema } from '@keystone-next/keystone/schema';
-import {
-  withItemData,
-  statelessSessions,
-} from '@keystone-next/keystone/session';
+import { createAuth } from '@keystone-6/auth';
+import { config } from '@keystone-6/core';
+import { statelessSessions } from '@keystone-6/core/session';
 import { permissionsList } from './schemas/fields';
 import { Role } from './schemas/Role';
 import { OrderItem } from './schemas/OrderItem';
@@ -17,7 +14,7 @@ import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
 import { extendGraphqlSchema } from './mutations';
 
-function check(name: string) {}
+function check(name: string) { }
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -62,7 +59,7 @@ export default withAuth(
         }
       },
     },
-    lists: createSchema({
+    lists: {
       // Schema items go in here
       User,
       Product,
@@ -71,7 +68,7 @@ export default withAuth(
       OrderItem,
       Order,
       Role,
-    }),
+    },
     extendGraphqlSchema,
     ui: {
       // Show the UI only for poeple who pass this test
@@ -79,9 +76,6 @@ export default withAuth(
         // console.log(session);
         !!session?.data,
     },
-    session: withItemData(statelessSessions(sessionConfig), {
-      // GraphQL Query
-      User: `id name email role { ${permissionsList.join(' ')} }`,
-    }),
+    session: statelessSessions(sessionConfig) //missing querry?
   })
 );
